@@ -22,7 +22,7 @@ const ModalComponent = ({ open, handleClose, data, type }) => {
             '/' +
             date.getFullYear()
 
-        const nextYear = (parseInt(new Date().getFullYear()))
+        const nextYear = parseInt(new Date().getFullYear())
 
         proposalsSample.push({
             name: proposalName,
@@ -32,6 +32,31 @@ const ModalComponent = ({ open, handleClose, data, type }) => {
             end_date: today.substring(today) + (nextYear + 1).toString(),
         })
     }
+
+    /**
+     * handle the uer clicking approve or deny on the proposal
+     */
+    const decideProposal = (approve = false) => {
+        proposalsSample.forEach((value, index) => {
+            if (data.name === value.name) {
+                proposalsSample[index].status = 'pending'
+                proposalsSample[index].decision = approve
+            }
+        })
+    }
+
+    /**
+     * Show the buttons to vote on the proposal if the user have not alread,
+     *  show what they decieded if they voted already
+     */
+    const showDecsionButtons = (<>{data.status === 'pending' ? (
+        <h3>Your decision on proposal: {data.decision ? 'Approved' : 'Rejected'}</h3>
+    ) : (
+        <ButtonGroup>
+            <DarkButton onClick={() => decideProposal(true)}>Approve</DarkButton>
+            <DarkButton onClick={() => decideProposal()}>Reject</DarkButton>
+        </ButtonGroup>
+    )}</>)
 
     return (
         <Modal
@@ -55,10 +80,8 @@ const ModalComponent = ({ open, handleClose, data, type }) => {
                             {data.name}
                         </GoldenBoldText>
                         <TextSection>{data.text}</TextSection>
-                        <ButtonGroup>
-                            <DarkButton>Approve</DarkButton>
-                            <DarkButton>Reject</DarkButton>
-                        </ButtonGroup>
+
+                        {showDecsionButtons}
                     </>
                 )}
             </StyledBox>
