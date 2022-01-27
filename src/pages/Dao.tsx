@@ -1,11 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 
-import proposalsSample from '../data/Proposals'
+import { getAllProposalsFromDB } from '../data/Proposals'
 import BluredCard from '../components/BluredCard'
 import Button from '../components/Button'
 import SectionTitle from '../components/SectionTitle'
 import ProposalItem from '../components/ProposalItem'
+import NewProposal from '../components/NewProposal'
+import ClosePopup from '../components/ClosePopup'
 
 const background = require('../assets/img/DarkButtonBackground.png')
 
@@ -33,33 +35,54 @@ const DaoStyles = styled.div`
 
         .button {
             cursor: pointer;
+            user-select: none;
         }
     }
-	.proposal__list {
-		max-height: 400px;
-		overflow-y: scroll;
+    .proposal__list {
+        max-height: 290px;
+        overflow-y: scroll;
 
-		&::-webkit-scrollbar {
-			width: 0;
-			background: transparent;
-		}
-	}
-	.proposal__item__container {
-		margin-bottom: 1rem;
-	}
+        &::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
+        }
+    }
+    .proposal__item__container {
+        margin-bottom: 1rem;
+    }
+
+    .hide__popup {
+        display: none;
+    }
 `
 
 const Dao = () => {
+    const [proposalList, setProposalList] = useState([])
     const [activeView, setActiveView] = useState(true)
+    const [showCreateProposal, setShowCreateProposal] = useState('hide__popup')
+
+    const ref = useRef(null);
+    ClosePopup(ref, () => setShowCreateProposal('hide__popup'));
+
+    // Get proposals from the database
+    useEffect(() => {
+        getAllProposalsFromDB().then(data => setProposalList(data))
+    }, [])
 
     return (
         <DaoStyles>
             <section className="dao__section">
-                <SectionTitle>DAO PORTAL: PROPOSALS</SectionTitle>
+                {/* new proposal popup */}
+                <div className={showCreateProposal} ref={ref}>
+                    <NewProposal></NewProposal>
+                </div>
 
+                <SectionTitle>DAO PORTAL: PROPOSALS</SectionTitle>
                 <BluredCard>
                     <div className="proposals">
-                        <Button>NEW PROPOSAL</Button>
+                        <div onClick={() => setShowCreateProposal('')}>
+                            <Button ids={'newProposal'}>NEW PROPOSAL</Button>
+                        </div>
 
                         <div className="change__view-button__container">
                             <h3
@@ -77,13 +100,21 @@ const Dao = () => {
                         </div>
 
                         <div className="proposal__list">
-                            {proposalsSample.map(proposal => (
-                                <>
-                                    <div className="proposal__item__container">
-                                        <ProposalItem proposal={proposal} />
-                                    </div>
-                                </>
-                            ))}
+                            {proposalList.map((proposal: any) => {
+                                if (activeView && proposal.status === 'active') {
+                                    return (
+                                        <div className="proposal__item__container" key={proposal.id}>
+                                            <ProposalItem proposal={proposal} />
+                                        </div>
+                                    )
+                                } else if (!activeView && proposal.status === 'closed') {
+                                    return (
+                                        <div className="proposal__item__container" key={proposal.id}>
+                                            <ProposalItem proposal={proposal} />
+                                        </div>
+                                    )
+                                }
+                            })}
                         </div>
                     </div>
                 </BluredCard>

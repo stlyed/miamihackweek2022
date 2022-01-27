@@ -31,7 +31,7 @@ const NavbarStyles = styled.div`
     }
 
     .navbar__logo {
-        height: 30px;
+        height: 40px;
         width: auto;
         margin-right: 0.5rem;
     }

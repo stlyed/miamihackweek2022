@@ -15,11 +15,11 @@ const ButtonStyles = styled.div`
     }
 `
 
-const Button: FC<any> = ({ children, lightButton = false, link = '#', textColor = 'white' }) => {
+const Button: FC<any> = ({ children, lightButton = false, link = '#', textColor = 'white'}) => {
     return (
         <ButtonStyles>
             <div
-                className="button__container"
+                className={"button__container" }
                 style={{
                     backgroundImage: `url(${lightButton ? lightBackground : darkbackground})`,
                 }}
