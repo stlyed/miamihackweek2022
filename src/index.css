@@ -1,40 +1,19 @@
-body {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  margin: 0;
-  font-family: Futura,Trebuchet MS,Arial,sans-serif !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /*background-color: #303030;*/
-  color: #FFFFFF;
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+a {
+    text-decoration: none;
 }
 
-@media (max-width: 1920px) {
-  body{
-    font-size: 14px;
-  }
+input,
+textarea {
+    border: none;
+    outline: none;
+    color: black;
 }
 
-@media (max-width: 1450px) {
-  body{
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 1200px) {
-  body{
-    font-size: 10px;
-  }
-}
-
-@media (max-width: 768px) {
-  body{
-    font-size: 8px;
-  }
-}
