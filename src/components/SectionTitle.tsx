@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const DaoStyles = styled.div`
     .title__container {
-        margin-top: 5.5rem;
+        margin-top: 2.5rem;
         text-align: center;
 
         .title {

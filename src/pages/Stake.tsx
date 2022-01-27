@@ -4,6 +4,8 @@ import BluredCard from '../components/BluredCard'
 import Button from '../components/Button'
 import SectionTitle from '../components/SectionTitle'
 
+const logo = require('../assets/img/logoDark.png')
+
 const StakeStyles = styled.div`
     .stake__form {
         margin: 3rem;
@@ -21,7 +23,11 @@ const StakeStyles = styled.div`
                 width: 100%;
                 height: 2rem;
                 border-radius: 0.5rem;
-                padding: 0 1rem;
+                padding: 0 3rem;
+                background: url(${logo}) no-repeat left;
+                background-position-x: 1rem;
+                background-size: 20px;
+                background-color: white;
             }
 
             .stake__form-submit__container * {
@@ -47,7 +53,10 @@ const StakeStyles = styled.div`
             padding: 0.25rem;
 
             .stake__statistic-item {
-                padding: 0 2rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.6rem 2rem;
                 color: black;
             }
         }
@@ -64,14 +73,16 @@ const Stake = () => {
                     <form className="stake__form" method="POST">
                         <div className="stake__form-input__container">
                             <h3 className="stake__form-input__title">STAKE</h3>
-                            <input type="text" name="" id="" className="stake__form-input" />
+                            <input type="text" name="" id="" className="stake__form-input" placeholder="Amount" />
                         </div>
                         <div className="stake__form-input__container">
                             <h3 className="stake__form-input__title">UNSTAKE</h3>
-                            <input type="text" name="" id="" className="stake__form-input" />
+                            <input type="text" name="" id="" className="stake__form-input" placeholder="Amount" />
                         </div>
                         <div className="stake__form-submit__container">
-                            <Button textColor="black" lightButton >Connect Wallet</Button>
+                            <Button textColor="black" lightButton>
+                                Connect Wallet
+                            </Button>
                         </div>
                     </form>
 
@@ -79,18 +90,22 @@ const Stake = () => {
                         <h2 className="stake__statistics-title">VICE CITY COIN STATISTICS</h2>
 
                         <div className="stake__statistics-container">
-                            <span className="stake__statistic-item">
-                                <h6 className="stake__statistic-item">Annual Percentage Rate</h6>
-                            </span>
-                            <span className="stake__statistic-item">
-                                <h6 className="stake__statistic-item">Total Staked</h6>
-                            </span>
-                            <span className="stake__statistic-item">
-                                <h6 className="stake__statistic-item">Stakers</h6>
-                            </span>
-                            <span className="stake__statistic-item">
-                                <h6 className="stake__statistic-item">VCC Market Cap</h6>
-                            </span>
+                            <div className="stake__statistic-item">
+                                <h6 className="stake__statistic">Annual Percentage Rate</h6>
+                                <h6 className="stake__statistic-value">5.89%</h6>
+                            </div>
+                            <div className="stake__statistic-item">
+                                <h6 className="stake__statistic">Total Staked</h6>
+                                <h6 className="stake__statistic-value">305 VCC</h6>
+                            </div>
+                            <div className="stake__statistic-item">
+                                <h6 className="stake__statistic">Stakers</h6>
+                                <h6 className="stake__statistic-value">35</h6>
+                            </div>
+                            <div className="stake__statistic-item">
+                                <h6 className="stake__statistic">VCC Market Cap</h6>
+                                <h6 className="stake__statistic-value">$278.94</h6>
+                            </div>
                         </div>
                     </div>
                 </BluredCard>
