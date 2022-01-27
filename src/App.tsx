@@ -15,6 +15,7 @@ const AppStyles = styled.div`
 	background-image: url(${background});
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
+    color: white;
 `
 
 const App = () => {

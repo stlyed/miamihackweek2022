@@ -6,7 +6,7 @@ const logo = require('../assets/img/logo.png')
 const wallet = require('../assets/img/wallet.png')
 const light = require('../assets/img/light.png')
 
-const NavbarStyles = styled.div`
+const NavbarStyles = styled.div`    
     .navbar__container,
     .navbar__column,
     .navlink,
@@ -16,6 +16,7 @@ const NavbarStyles = styled.div`
         flex-direction: row;
         align-items: center;
         justify-content: center;
+        color: white;
     }
 
     .navbar__container {
@@ -28,12 +29,25 @@ const NavbarStyles = styled.div`
 
     .navbar__middle {
         gap: 3rem;
+
+        .navlink {
+            color: grey;
+
+            &.active {
+                color: white;
+            }
+        }
     }
 
     .navbar__logo {
         height: 40px;
         width: auto;
         margin-right: 0.5rem;
+    }
+
+    .navbar__title {
+        font-family: 'Tenor Sans', sans-serif;
+        font-weight: 200;
     }
 
     .navbar__item-icon {

@@ -6,11 +6,6 @@
     margin: 0;
 }
 
-* {
-    color: white;
-    font-family: 'Reem Kufi', sans-serif;
-}
-
 a {
     text-decoration: none;
 }
@@ -21,3 +16,4 @@ textarea {
     outline: none;
     color: black;
 }
+
