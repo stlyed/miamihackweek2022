@@ -24,21 +24,29 @@ const ProposalItemStyles = styled.div`
 
 const ProposalItem: FC<any> = proposal => {
     const [showOpenProposal, setshowOpenProposal] = useState('hide__popup')
-    const ref = useRef(null);
-    ClosePopup(ref, () => setshowOpenProposal('hide__popup'));
+    const ref = useRef(null)
+    ClosePopup(ref, () => setshowOpenProposal('hide__popup'))
 
-    useEffect(() => {
+    const decide = () => {
+        // @ts-ignore
+        const localProposals = JSON.parse(localStorage.getItem('proposals'))
         
-        // localStorage.setItem("proposals", JSON.stringify([]));
-    }, [])
+        for (let i = 0; i < localProposals.length; i++) {
+            if (localProposals[i]._id === proposal.proposal._id) {
+                return localProposals[i].decision
+            }
+        }
+    }
 
     return (
         <ProposalItemStyles>
-            <div className={showOpenProposal} ref={ref} >
+            <div className={showOpenProposal} ref={ref}>
                 <OpenProposal
-                    name={proposal.proposal.name}
+                    id={proposal.proposal._id}
                     subject={proposal.proposal.subject}
                     text={proposal.proposal.text}
+                    decision={decide()}
+                    status={proposal.proposal.status}
                 ></OpenProposal>
             </div>
 

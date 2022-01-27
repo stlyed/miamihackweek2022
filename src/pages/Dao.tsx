@@ -61,12 +61,17 @@ const Dao = () => {
     const [activeView, setActiveView] = useState(true)
     const [showCreateProposal, setShowCreateProposal] = useState('hide__popup')
 
-    const ref = useRef(null);
-    ClosePopup(ref, () => setShowCreateProposal('hide__popup'));
+    const ref = useRef(null)
+    ClosePopup(ref, () => setShowCreateProposal('hide__popup'))
 
     // Get proposals from the database
     useEffect(() => {
-        getAllProposalsFromDB().then(data => setProposalList(data))
+        getAllProposalsFromDB().then(data => {
+            setProposalList(data)
+            if (localStorage.getItem('proposals') === "[]") {
+                localStorage.setItem('proposals', JSON.stringify(data))
+            }
+        })
     }, [])
 
     return (
@@ -103,13 +108,13 @@ const Dao = () => {
                             {proposalList.map((proposal: any) => {
                                 if (activeView && proposal.status === 'active') {
                                     return (
-                                        <div className="proposal__item__container" key={proposal.id}>
+                                        <div className="proposal__item__container" key={proposal._id}>
                                             <ProposalItem proposal={proposal} />
                                         </div>
                                     )
                                 } else if (!activeView && proposal.status === 'closed') {
                                     return (
-                                        <div className="proposal__item__container" key={proposal.id}>
+                                        <div className="proposal__item__container" key={proposal._id}>
                                             <ProposalItem proposal={proposal} />
                                         </div>
                                     )

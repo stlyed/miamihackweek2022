@@ -1,5 +1,4 @@
 import { FC, useState } from 'react'
-import { v4 as uuid } from 'uuid'
 import styled from 'styled-components'
 import { addProposalToDB } from '../data/Proposals'
 
@@ -80,8 +79,13 @@ const NewProposal: FC<any> = ({ proposal }) => {
             date.getFullYear()
         const nextYear = new Date().getFullYear()
 
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        const proposalDecisions = JSON.parse(localStorage.getItem('proposals'))
+        proposalDecisions.push(proposal)
+        localStorage.setItem('proposals', JSON.stringify(proposalDecisions))
+
         addProposalToDB({
-            id: uuid(),
             name: proposalSubject,
             subject: proposalSubject,
             text: proposalText,
@@ -99,7 +103,7 @@ const NewProposal: FC<any> = ({ proposal }) => {
                     className="new-proposal__form"
                     onSubmit={e => {
                         // create a new proposal if all the fields have something else do nothing
-                        if ( proposalSubject && proposalText) {
+                        if (proposalSubject && proposalText) {
                             newProposal()
                         } else {
                             e.preventDefault()

@@ -10,6 +10,10 @@ mongoose.connect(dbURI).then(response => {
     app.listen(4000)
 })
 
+app.get('/', (req, res) => {
+    res.sendStatus(200).send('it\'s working')
+})
+
 app.get('/proposals-list', (req, res) => {
     Proposal.find().then(response => {
         res.send(response)
@@ -25,7 +29,6 @@ app.post('/proposals-new', (req, res) => {
 
 app.post('/proposals-modify', (req, res) => {
     Proposal.findOneAndUpdate({name: 'Proposal 9'}, {name: 'Something nice'}).then(response => {
-        console.log(response)
+        res.sendStatus(200)
     })
-    res.sendStatus(200)
 })

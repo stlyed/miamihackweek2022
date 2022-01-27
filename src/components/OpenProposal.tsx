@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import styled from 'styled-components'
 
 const ButtonBackground = require('../assets/img/DarkButtonBackground.png')
@@ -57,12 +57,12 @@ const OpenProposalStyles = styled.div`
                 padding: 1.5rem;
                 border-radius: 10%;
                 user-select: none;
-				cursor: pointer;
-				transition: .3s ease-in-out;
+                cursor: pointer;
+                transition: 0.3s ease-in-out;
 
-				&:hover {
-					font-size: 90%;
-				}
+                &:hover {
+                    font-size: 90%;
+                }
             }
         }
 
@@ -75,13 +75,20 @@ const OpenProposalStyles = styled.div`
     }
 `
 
-const OpenProposal: FC<any> = ({ subject, text }) => {
-    let decision
+const OpenProposal: FC<any> = ({ id, subject, text, decision, status }) => {
+    // @ts-ignore
+    const proposals = JSON.parse(localStorage.getItem('proposals'))
 
-    const decideProposal = (decided:boolean) => {
-        console.log(decided)
+    const decideProposal = (decided: boolean) => {
+        for (const e in proposals) {
+            if (proposals[e]._id === id) {
+                proposals[e].decision = decided
+                localStorage.setItem('proposals', JSON.stringify(proposals))
+                window.location.reload()
+            }
+        }
     }
-    
+
     return (
         <OpenProposalStyles>
             <div className="open-proposal__container">
@@ -91,14 +98,26 @@ const OpenProposal: FC<any> = ({ subject, text }) => {
                 </div>
 
                 <div className="button__container">
-                    {decision !== null ? (
+                    {decision === undefined ? (
                         <>
-                            <div className="vote__button-container" >
-                                <a className="vote__button" onClick={() => decideProposal(true)}>Approve</a>
-                            </div>
-                            <div className="vote__button-container">
-                                <h5 className="vote__button" onClick={() => decideProposal(false)}>Reject</h5>
-                            </div>{' '}
+                            {status === 'active' ? (
+                                <>
+                                    <div className="vote__button-container">
+                                        <a className="vote__button" onClick={() => decideProposal(true)}>
+                                            Approve
+                                        </a>
+                                    </div>
+                                    <div className="vote__button-container">
+                                        <h5 className="vote__button" onClick={() => decideProposal(false)}>
+                                            Reject
+                                        </h5>
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="show__vote">
+                                    <h5 className="show__vote-button">Closed</h5>
+                                </div>
+                            )}
                         </>
                     ) : (
                         <>
