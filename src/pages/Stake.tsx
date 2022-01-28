@@ -79,9 +79,9 @@ const Stake = () => {
                             <h3 className="stake__form-input__title">UNSTAKE</h3>
                             <input type="text" name="" id="" className="stake__form-input" placeholder="Amount" />
                         </div>
-                        <div className="stake__form-submit__container">
+                        <div className="stake__form-submit__container" onClick={() => console.log('clicked')}>
                             <Button textColor="black" lightButton>
-                                Connect Wallet
+                                Send
                             </Button>
                         </div>
                     </form>

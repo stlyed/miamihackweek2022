@@ -27,12 +27,13 @@ const OpenProposalStyles = styled.div`
             }
 
             h3 {
-                margin-bottom: 2rem;
+                margin-bottom: 5rem;
                 font-size: 2.5rem;
             }
 
             p {
                 font-size: 1.5rem;
+                white-space: pre;
             }
         }
 

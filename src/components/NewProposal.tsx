@@ -39,6 +39,8 @@ const NewProposalStyles = styled.div`
                 border-radius: 0.75rem;
                 width: 80%;
                 resize: none;
+                font-family: 'Tenor Sans', sans-serif;
+                font-size: 1.25rem;
             }
 
             .proposal__submit-container {
@@ -79,22 +81,24 @@ const NewProposal: FC<any> = ({ proposal }) => {
             date.getFullYear()
         const nextYear = new Date().getFullYear()
 
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        const proposalDecisions = JSON.parse(localStorage.getItem('proposals'))
-        proposalDecisions.push(proposal)
-        localStorage.setItem('proposals', JSON.stringify(proposalDecisions))
-
-        addProposalToDB({
+        const data = {
             name: proposalSubject,
             subject: proposalSubject,
             text: proposalText,
             status: 'active',
             start_date: today,
             end_date: today.substring(4, 2) + (nextYear + 1).toString(),
-        })
-    }
+        }
 
+
+        // @ts-ignore
+        const proposalDecisions = JSON.parse(localStorage.getItem('proposals'))
+        proposalDecisions.push(data)
+        localStorage.setItem('proposals', JSON.stringify(proposalDecisions))
+        
+        addProposalToDB(data)
+    }
+    
     return (
         <NewProposalStyles>
             <div className="new-proposal__container">

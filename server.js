@@ -22,6 +22,7 @@ app.get('/proposals-list', (req, res) => {
 
 app.post('/proposals-new', (req, res) => {
     const proposal = new Proposal(req.body)
+    console.log(proposal)
     proposal.save().then(response => {
         res.sendStatus(200)
     })
