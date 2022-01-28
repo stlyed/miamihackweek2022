@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import BluredCard from '../components/BluredCard'
+import BluredCard from '../Components/BluredCard'
 
-import Button from '../components/Button'
-import SectionTitle from '../components/SectionTitle'
+import Button from '../Components/Button'
+import SectionTitle from '../Components/SectionTitle'
 
 const logo = require('../assets/img/logoDark.png')
 

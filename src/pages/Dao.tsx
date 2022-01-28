@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 
 import { getAllProposalsFromDB } from '../data/Proposals'
-import BluredCard from '../components/BluredCard'
-import Button from '../components/Button'
-import SectionTitle from '../components/SectionTitle'
-import ProposalItem from '../components/ProposalItem'
-import NewProposal from '../components/NewProposal'
-import ClosePopup from '../components/ClosePopup'
+import BluredCard from '../Components/BluredCard'
+import Button from '../Components/Button'
+import SectionTitle from '../Components/SectionTitle'
+import ProposalItem from '../Components/ProposalItem'
+import NewProposal from '../Components/NewProposal'
+import ClosePopup from '../Components/ClosePopup'
 
 const background = require('../assets/img/DarkButtonBackground.png')
 
