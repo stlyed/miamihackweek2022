@@ -1,1 +1,0 @@
-# VCC - Vice City Coin
