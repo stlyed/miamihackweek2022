@@ -11,7 +11,7 @@ mongoose.connect(process.env.DB_URI).then(response => {
 })
 
 app.get('/', (req, res) => {
-    res.sendStatus(200).send('it\'s working')
+    res.sendStatus(200)
 })
 
 app.get('/proposals-list', (req, res) => {
@@ -22,14 +22,13 @@ app.get('/proposals-list', (req, res) => {
 
 app.post('/proposals-new', (req, res) => {
     const proposal = new Proposal(req.body)
-    console.log(proposal)
-    proposal.save().then(response => {
+    proposal.save().then(() => {
         res.sendStatus(200)
     })
 })
 
 app.post('/proposals-modify', (req, res) => {
-    Proposal.findOneAndUpdate(req.body[0], req.body[1]).then(response => {
+    Proposal.findOneAndUpdate(req.body[0], req.body[1]).then(() => {
         res.sendStatus(200)
     })
 })
