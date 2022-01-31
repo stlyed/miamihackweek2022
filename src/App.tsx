@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import styled from 'styled-components'
 
-import Navbar from './components/Navbar'
-import Dao from './pages/Dao'
-import Stake from './pages/Stake'
+import Navbar from './Components/Navbar'
+import Dao from './Pages/Dao'
+import Stake from './Pages/Stake'
 
 import './index.css'
 

@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const Proposal = require('./models/proposals')
@@ -5,13 +6,12 @@ const Proposal = require('./models/proposals')
 const app = express()
 app.use(express.json())
 
-const dbURI = 'mongodb+srv://admin:cxAGT3NDBdrJnKrR@vcc-database.00sva.mongodb.net/proposalsDB?retryWrites=true&w=majority'
-mongoose.connect(dbURI).then(response => {
-    app.listen(4000)
+mongoose.connect(process.env.DB_URI).then(response => {
+    app.listen(process.env.SERVER_PORT)
 })
 
 app.get('/', (req, res) => {
-    res.sendStatus(200).send('it\'s working')
+    res.sendStatus(200)
 })
 
 app.get('/proposals-list', (req, res) => {
@@ -22,13 +22,13 @@ app.get('/proposals-list', (req, res) => {
 
 app.post('/proposals-new', (req, res) => {
     const proposal = new Proposal(req.body)
-    proposal.save().then(response => {
+    proposal.save().then(() => {
         res.sendStatus(200)
     })
 })
 
 app.post('/proposals-modify', (req, res) => {
-    Proposal.findOneAndUpdate({name: 'Proposal 9'}, {name: 'Something nice'}).then(response => {
+    Proposal.findOneAndUpdate(req.body[0], req.body[1]).then(() => {
         res.sendStatus(200)
     })
 })

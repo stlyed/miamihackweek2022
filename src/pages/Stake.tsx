@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import BluredCard from '../components/BluredCard'
+import BluredCard from '../Components/BluredCard'
 
-import Button from '../components/Button'
-import SectionTitle from '../components/SectionTitle'
+import Button from '../Components/Button'
+import SectionTitle from '../Components/SectionTitle'
 
 const logo = require('../assets/img/logoDark.png')
 
@@ -79,9 +79,9 @@ const Stake = () => {
                             <h3 className="stake__form-input__title">UNSTAKE</h3>
                             <input type="text" name="" id="" className="stake__form-input" placeholder="Amount" />
                         </div>
-                        <div className="stake__form-submit__container">
+                        <div className="stake__form-submit__container" onClick={() => console.log('clicked')}>
                             <Button textColor="black" lightButton>
-                                Connect Wallet
+                                Send
                             </Button>
                         </div>
                     </form>
