@@ -1,4 +1,4 @@
-const PostRequest = (url:string, data:object) => {
+const PostRequest = (url: string, data: object | String[]) => {
     return fetch(url, {
         method: 'POST',
         mode: 'cors',
@@ -14,7 +14,7 @@ export const addProposalToDB = async (data: object) => {
     await PostRequest('/proposals-new', data)
 }
 
-export const modifyProposalInDB = async (data:object) => {
+export const modifyProposalInDB = async (data: object) => {
     await PostRequest('/proposals-modify', data)
 }
 
@@ -22,7 +22,7 @@ export const getAllProposalsFromDB = async () => {
     const response = await fetch('/proposals-list', {
         method: 'GET',
         mode: 'cors',
-        headers : {Accept: 'application/json'}
+        headers: { Accept: 'application/json' },
     })
     return await response.json()
 }
